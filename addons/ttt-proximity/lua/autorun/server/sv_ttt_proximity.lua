@@ -1,12 +1,12 @@
 -- TTT Phoenix - Proximity Voice
 -- Players only hear nearby living players. Spectators hear everyone.
 -- Volume falls off linearly between PROX_FULL and PROX_MAX (in source units).
--- 1 metre ~= 39.37 source units. 50 m ~= 1968 units.
+-- 1 metre ~= 39.37 source units. 30 m ~= 1181 units. 50 m ~= 1968 units.
 
 if not SERVER then return end
 
 local PROX_FULL = 1200    -- ~30 m: full volume
-local PROX_MAX  = 2400   -- ~60 m: silence
+local PROX_MAX  = 2000   -- ~50 m: silence
 local DEAD_HEARS_DEAD = true
 
 CreateConVar("ttt_proximity_voice", "1", { FCVAR_ARCHIVE, FCVAR_NOTIFY },
