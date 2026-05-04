@@ -5,7 +5,7 @@
 
 if not SERVER then return end
 
-local PROX_FULL = 600    -- ~15 m: full volume
+local PROX_FULL = 1200    -- ~30 m: full volume
 local PROX_MAX  = 2400   -- ~60 m: silence
 local DEAD_HEARS_DEAD = true
 
