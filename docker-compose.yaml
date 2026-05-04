@@ -1,0 +1,64 @@
+
+services:
+  garrysmod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ttt-phoenix/garrysmod:latest
+    container_name: garrysmod-server
+    ports:
+      # Use port 27016 on BOTH host and container. The local gmod.exe
+      # client binds UDP 27015 itself, so we move the dedicated server
+      # to 27016. Identical port on both sides ensures the LAN browser
+      # advertises the correct address (192.168.x.x:27016).
+      # In-game connect via: connect <host-ip>:27016
+      - "27016:27016/udp"
+      - "27016:27016/tcp"
+      - "27006:27005/udp"
+    volumes:
+      # Sources are mounted read-only into /srv/* (avoids 9p quirks with
+      # Source engine's directory enumeration). start.sh syncs them into
+      # the real /home/gmod/server/garrysmod/{addons,gamemodes} on every
+      # container start.
+      - ./addons:/srv/addons:ro
+      - ./gamemodes:/srv/gamemodes:ro
+      - gmod_steam_cache:/home/gmod/server/steam_cache #if using workshop collection
+      - gmod_server_cache:/home/gmod/server/garrysmod/cache #if using workshop collection
+    environment:
+      HOSTNAME: "TTTPhoenix"
+      NAME: "EinsPhoenix"
+      PRODUCTION: "1"
+      GAMEMODE: "terrortown"
+      # Move srcds off the default 27015 so the local GMod client
+      # (which also binds 27015) does not intercept queries.
+      PORT: "27016"
+      # Fallback map if MAPS is empty
+      MAP: "ttt_minecraft_b5"
+      # Comma / space / newline separated map list. Shuffled on every container
+      # start; srcds rotates through them via cfg/mapcycle.txt.
+      MAPS: "ttt_minecraft_b5, ttt_67thway_v3, ttt_clue_se, ttt_dolls, ttt_rooftops_a2_f1, ttt_waterworld, ttt_airbus_b3, ttt_clue_se_xn, ttt_mc_skyislands"
+      # Steam Workshop addon IDs (gmod app 4000) downloaded by start.sh
+      # via steamcmd and linked into garrysmod/addons. Clients auto-download
+      # the same IDs through the ttt-workshop addon (resource.AddWorkshop).
+      # Weapons:
+      #   807428039 - Holy Hand Grenade TTT (Hds46)
+      #   356664308 - [TTT] Melon Launcher  (Daywalker)
+      # Map vote (between rounds):
+      #   151583504 - MapVote (Lucien, Fretta-like)
+      # TTT maps:
+      #   159321088 - ttt_minecraft_b5
+      #   221814617 - ttt_67thway_v3
+      #   281454209 - ttt_clue_se
+      #   195227686 - ttt_dolls
+      #   419903291 - ttt_rooftops_a2_f1
+      #   157420728 - ttt_waterworld   (bonus)
+      #   253297309 - ttt_airbus_b3    (bonus)
+      #   811718553 - thomas gun
+      WORKSHOP_IDS: "2051674221 654570222 278574247 531273960 247519633 106498411 838428600 121287462 807428039 356664308 151583504 159321088 221814617 281454209 195227686 419903291 157420728 253297309 811718553 2051674221"
+      # ARGS: "+host_workshop_collection collectionId" #optional
+    stdin_open: true
+    tty: true
+
+volumes:
+  gmod_steam_cache: #if using workshop collection
+  gmod_server_cache: #if using workshop collection

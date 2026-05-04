@@ -1,0 +1,57 @@
+# --- Build / runtime artifacts -------------------------------------------
+build.log
+*.log
+
+# --- Workshop content extracted at runtime -------------------------------
+# assets/start.sh downloads + extracts workshop addons into addons/ws_<id>/.
+# Keep ttt-workshop (which is source we maintain) but ignore everything
+# pulled from Steam Workshop.
+addons/ws_*/
+
+# --- User-supplied binary content ----------------------------------------
+# We never want copyrighted media (memes, music, voice clips) in the repo.
+# Drop your own files into addons/<addon>/sound|materials|models manually;
+# they live on your machine only.
+addons/**/sound/**/*.mp3
+addons/**/sound/**/*.wav
+addons/**/sound/**/*.ogg
+addons/**/materials/**/*.vtf
+addons/**/materials/**/*.vmt
+addons/**/materials/**/*.png
+addons/**/materials/**/*.jpg
+addons/**/models/**/*.mdl
+addons/**/models/**/*.vvd
+addons/**/models/**/*.phy
+addons/**/models/**/*.vtx
+
+# --- Stock / generated gamemode files ------------------------------------
+# Vanilla GMod gamemodes (base, sandbox, terrortown) ship with the
+# dedicated server install (SteamCMD app 4020) and must not live in the
+# repo. Only commit your own override files inside gamemodes/<your-gm>/.
+gamemodes/*
+!gamemodes/.gitkeep
+# If you ever want to commit a custom gamemode override, un-ignore it
+# explicitly, e.g.:
+#   !gamemodes/my_ttt_overrides/
+#   !gamemodes/my_ttt_overrides/**
+
+# --- Optional bind-mounted caches on the host ----------------------------
+# (named volumes live under Docker's data root, not in the repo; this just
+# protects accidental bind mounts)
+steam_cache/
+server_cache/
+
+# --- Editor / OS noise ---------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Temporary files -----------------------------------------------------
+*.tmp
+*.bak
+*.orig
+*~

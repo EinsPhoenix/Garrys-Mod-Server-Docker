@@ -1,0 +1,23 @@
+# Default: text files checkout with LF line endings.
+* text=auto eol=lf
+
+# Binary assets must never be CRLF-converted.
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.bsp binary
+*.gma binary
+*.bin binary
+*.vmt binary
+*.vtf binary
+*.mdl binary
+*.vvd binary
+*.phy binary
+*.vtx binary
+
+# Shell scripts must always be LF.
+*.sh text eol=lf
