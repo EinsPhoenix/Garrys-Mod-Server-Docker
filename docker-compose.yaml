@@ -36,7 +36,7 @@ services:
       MAP: "ttt_minecraft_b5"
       # Comma / space / newline separated map list. Shuffled on every container
       # start; srcds rotates through them via cfg/mapcycle.txt.
-      MAPS: "ttt_minecraft_b5, ttt_67thway_v3, ttt_clue_se, ttt_dolls, ttt_rooftops_a2_f1, ttt_waterworld, ttt_airbus_b3, ttt_clue_se_xn, ttt_mc_skyislands"
+      MAPS: "ttt_minecraft_b5, ttt_mc_skyislands, ttt_67thway_v3, ttt_clue_se, ttt_dolls, ttt_rooftops_a2_f1, ttt_waterworld, ttt_airbus_b3, ttt_clue_se_xn, ttt_mc_skyislands"
       # Steam Workshop addon IDs (gmod app 4000) downloaded by start.sh
       # via steamcmd and linked into garrysmod/addons. Clients auto-download
       # the same IDs through the ttt-workshop addon (resource.AddWorkshop).
@@ -55,7 +55,7 @@ services:
       #   253297309 - ttt_airbus_b3    (bonus)
       #   811718553 - thomas gun
       #   2306802961 - TTT Damage Logs & RDM Manager (Badger)
-      WORKSHOP_IDS: "2306802961 811718553 2051674221 654570222 278574247 531273960 247519633 106498411 838428600 807428039 356664308 151583504 159321088 221814617 281454209 195227686 419903291 157420728 253297309"
+      WORKSHOP_IDS: "2306802961 807428039 356664308 151583504 159321088 221814617 281454209 195227686 419903291 157420728 253297309 106498411 654570222 106498411"
       # ARGS: "+host_workshop_collection collectionId" #optional
     stdin_open: true
     tty: true
